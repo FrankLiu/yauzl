@@ -601,11 +601,13 @@ function bufferToString(buffer, start, end, isUtf8) {
   if (isUtf8) {
     return buffer.toString("utf8", start, end);
   } else {
-    var result = "";
-    for (var i = start; i < end; i++) {
-      result += cp437[buffer[i]];
-    }
-    return result;
+	  var iconv = require('iconv-lite');
+	  return iconv.decode(buffer.slice(start, end), 'gbk');
+    // var result = "";
+    // for (var i = start; i < end; i++) {
+      // result += cp437[buffer[i]];
+    // }
+    // return result;
   }
 }
 
